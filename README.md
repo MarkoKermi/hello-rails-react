@@ -77,8 +77,10 @@ To run this project you need the following dependencies:
 To run the project, execute the following command in the terminal:
 
 ```sh
-  cd hello-rails-back-end
-  rails s
+  cd hello-rails-react
+  npm i
+  rails db:create db:mgrate
+  ./bin/dev
 ```
 
 ## 👥 Author <a name="author"></a>
