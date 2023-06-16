@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { fetchGreeting } from '../redux/actions';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getRandomGreeting } from "../redux/greetings/greetingsSlice";
 
-const Greeting = ({ greeting, fetchGreeting }) => {
+const Greeting = () => {
+  const dispatch = useDispatch();
+  const greeting = useSelector((state) => state.greetings.greeting);
+
   useEffect(() => {
-    fetchGreeting();
-  }, [fetchGreeting]);
+    dispatch(getRandomGreeting());
+  }, []);
 
-  return <h1>{greeting}</h1>;
-};
-
-const mapStateToProps = (state) => ({
-  greeting: state.greeting,
-});
-
-export default connect(mapStateToProps, { fetchGreeting })(Greeting);
+  if (greeting) {
+    return (
+      <div>
+        <h1>{greeting.message}</h1>
+      </div>
+    )
+  } else {
+    return (
+      <h1>No message saved...</h1>
+    )
+  }
+}
+export default Greeting;
